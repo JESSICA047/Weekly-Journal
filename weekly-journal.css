@@ -1,0 +1,632 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #222;
+}
+
+.page-title span {
+    display: block;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: #999;
+    margin-top: 4px;
+    font-weight: 400;
+}
+
+.week-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.week-btn {
+    background: #f0f0f0;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.2s;
+}
+
+.week-btn:hover {
+    background: #e0e0e0;
+}
+
+.week-label-display {
+    font-size: 14px;
+    color: #666;
+    min-width: 150px;
+    text-align: center;
+}
+
+/* Section labels */
+.section-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+/* Intention card */
+.intention-card {
+    background: #f9f9f9;
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 1.5rem;
+}
+
+.intention-card textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.intention-card textarea:focus {
+    outline: none;
+    border-color: #4285f4;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+/* Days grid */
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.day-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+    background: white;
+}
+
+.day-card.active {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.day-header {
+    padding: 16px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.day-header:hover {
+    background: #f0f0f0;
+}
+
+.day-left,
+.day-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.day-pip {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    transition: background 0.2s;
+}
+
+.day-pip.filled {
+    background: #4285f4;
+}
+
+.day-name-txt {
+    font-weight: 500;
+    color: #333;
+}
+
+.day-meta {
+    font-size: 12px;
+    color: #999;
+}
+
+.day-chevron {
+    color: #999;
+    transition: transform 0.2s;
+}
+
+.day-chevron.open {
+    transform: rotate(180deg);
+}
+
+.day-body {
+    padding: 16px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.day-body.open {
+    max-height: 2000px;
+    transition: max-height 0.3s ease-in;
+}
+
+/* Todo section */
+.todo-list {
+    margin-bottom: 16px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.todo-check {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: all 0.2s;
+}
+
+.todo-check:hover {
+    border-color: #4285f4;
+}
+
+.todo-check.done {
+    background: #4285f4;
+    border-color: #4285f4;
+}
+
+.todo-check.done::after {
+    content: '✓';
+    display: block;
+    color: white;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+}
+
+.todo-text {
+    flex: 1;
+    padding: 6px 8px;
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    resize: none;
+    min-height: 28px;
+}
+
+.todo-text:focus {
+    outline: none;
+}
+
+.todo-text.done-text {
+    color: #999;
+    text-decoration: line-through;
+}
+
+/* Divider */
+.divider {
+    height: 1px;
+    background: #e0e0e0;
+    margin: 16px 0;
+}
+
+/* Energy section */
+.energy-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.energy-lbl {
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
+}
+
+.energy-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.e-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.e-dot:hover {
+    border-color: #999;
+}
+
+.e-dot.el {
+    background: #f44336;
+    border-color: #f44336;
+}
+
+.e-dot.em {
+    background: #ff9800;
+    border-color: #ff9800;
+}
+
+.e-dot.eh {
+    background: #4caf50;
+    border-color: #4caf50;
+}
+
+/* Two column layout */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.mini-field,
+.full-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.mini-field textarea,
+.full-field textarea {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    resize: vertical;
+    margin-top: 6px;
+}
+
+.mini-field textarea:focus,
+.full-field textarea:focus {
+    outline: none;
+    border-color: #4285f4;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.full-field {
+    margin-bottom: 0;
+}
+
+.full-field textarea {
+    min-height: 80px;
+}
+
+/* Buttons */
+.add-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f0f0f0;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s;
+}
+
+.add-btn:hover {
+    background: #e0e0e0;
+}
+
+/* Reflection section */
+.reflection-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.ref-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 16px;
+    background: white;
+}
+
+.ref-card.stats {
+    grid-column: 1 / -1;
+}
+
+.ref-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: #333;
+    font-size: 14px;
+}
+
+.ref-title i {
+    font-size: 16px;
+}
+
+/* List items */
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.bullet.b-green {
+    background: #4caf50;
+}
+
+.bullet.b-red {
+    background: #f44336;
+}
+
+.bullet.b-amber {
+    background: #ff9800;
+}
+
+.bullet.b-purple {
+    background: #9c27b0;
+}
+
+.list-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 4px 0;
+}
+
+.list-input:focus {
+    outline: none;
+}
+
+.list-input::placeholder {
+    color: #ccc;
+}
+
+.full-textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.full-textarea:focus {
+    outline: none;
+    border-color: #4285f4;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+/* Stats */
+.stats-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.stat-card {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+.stat-num {
+    font-size: 24px;
+    font-weight: 600;
+    color: #4285f4;
+}
+
+.stat-lbl {
+    font-size: 11px;
+    color: #999;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* Rating */
+.rating-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+}
+
+.rate-pill {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+}
+
+.rate-pill:hover {
+    border-color: #4285f4;
+}
+
+.rate-pill.selected {
+    background: #4285f4;
+    color: white;
+    border-color: #4285f4;
+}
+
+/* Save bar */
+.save-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: #f9f9f9;
+    border-radius: 6px;
+    margin-top: 30px;
+}
+
+.save-note {
+    font-size: 12px;
+    color: #666;
+}
+
+.save-status {
+    font-size: 12px;
+    color: #999;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.save-status.show {
+    opacity: 1;
+}
+
+.save-btn {
+    background: #4285f4;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.save-btn:hover {
+    background: #3367d6;
+}
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #333;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.toast.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Google Sign-In button styling */
+#googleSignIn {
+  display: flex;
+  align-items: center;
+}
+
+#googleSignIn div {
+  display: flex;
+  align-items: center !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    .week-controls {
+        width: 100%;
+    }
+
+    .days-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reflection-section {
+        grid-template-columns: 1fr;
+    }
+
+    .two-col {
+        grid-template-columns: 1fr;
+    }
+
+    .save-bar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+}
