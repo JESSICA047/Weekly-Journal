@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link rel="stylesheet" href="weekly-journal.css" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="page-header">
+      <div>
+        <div class="page-title">
+          Weekly Journal
+          <span id="weekSubtitle">loading...</span>
+        </div>
+      </div>
+      <div class="week-controls">
+        <button class="week-btn" onclick="changeWeek(-1)" title="Previous week"><i
+            class="ti ti-chevron-left"></i></button>
+        <div class="week-label-display" id="weekDisplay">—</div>
+        <button class="week-btn" onclick="changeWeek(1)" title="Next week"><i class="ti ti-chevron-right"></i></button>
+      </div>
+      <div id="googleSignIn"></div>
+    </div>
+
+    <!-- Intention -->
+    <div class="section-label">Intention for this week</div>
+    <div class="intention-card">
+      <textarea id="weekIntention" rows="2" placeholder="What do you want to focus on or feel this week?"></textarea>
+    </div>
+
+    <!-- Daily Log -->
+    <div class="section-label">Daily log</div>
+    <div class="days-grid" id="daysGrid"></div>
+
+    <!-- Reflection -->
+    <div class="section-label">Weekly reflection</div>
+    <div class="reflection-section">
+
+      <div class="ref-card">
+        <div class="ref-title"><i class="ti ti-trophy"></i> Wins</div>
+        <div id="winsList"></div>
+        <button class="add-btn" onclick="addListItem('winsList','b-green','Something that went well...')"><i
+            class="ti ti-plus"></i> add win</button>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title"><i class="ti ti-flame"></i> Losses / things to improve</div>
+        <div id="lossesList"></div>
+        <button class="add-btn" onclick="addListItem('lossesList','b-red','Something that didn\'t go as planned...')"><i
+            class="ti ti-plus"></i> add loss</button>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title"><i class="ti ti-bulb"></i> Key lessons</div>
+        <div id="lessonsList"></div>
+        <button class="add-btn" onclick="addListItem('lessonsList','b-amber','What did this week teach you?')"><i
+            class="ti ti-plus"></i> add lesson</button>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title"><i class="ti ti-heart"></i> Gratitude & highlights</div>
+        <div id="gratitudeList"></div>
+        <button class="add-btn" onclick="addListItem('gratitudeList','b-purple','I\'m grateful for...')"><i
+            class="ti ti-plus"></i> add</button>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title"><i class="ti ti-arrow-right"></i> Carry forward to next week</div>
+        <textarea class="full-textarea" id="carryForward"
+          placeholder="Unfinished tasks, intentions, or ideas to bring into next week..."></textarea>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title"><i class="ti ti-chart-bar"></i> Week in numbers</div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-num" id="totalTodos">0</div>
+            <div class="stat-lbl">tasks logged</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="completedTodos">0</div>
+            <div class="stat-lbl">done</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="totalWins">0</div>
+            <div class="stat-lbl">wins</div>
+          </div>
+        </div>
+        <div class="section-label">Overall week rating</div>
+        <div class="rating-row" id="ratingRow">
+          <button class="rate-pill" onclick="setRating(this,'😔 rough')">😔 rough</button>
+          <button class="rate-pill" onclick="setRating(this,'😐 okay')">😐 okay</button>
+          <button class="rate-pill" onclick="setRating(this,'🙂 good')">🙂 good</button>
+          <button class="rate-pill" onclick="setRating(this,'🌟 great')">🌟 great</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="save-bar">
+      <div>
+        <span class="save-note">Entries saved to your browser (localStorage)</span><br>
+        <span class="save-status" id="saveStatus">✓ Saved</span>
+      </div>
+      <button class="save-btn" onclick="saveAll()">Save journal</button>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast">Journal saved!</div>
+
+  <script src="weekly-journal.js"></script>
+</body>
+
+</html>
