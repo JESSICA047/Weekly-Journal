@@ -400,11 +400,7 @@ function handleCredentialResponse(response) {
     },
   });
 
-  if (gapi.client.getToken() === null) {
-    tokenClient.requestAccessToken({ prompt: "consent" });
-  } else {
-    tokenClient.requestAccessToken({ prompt: "" });
-  }
+  tokenClient.requestAccessToken({ prompt: "consent" });
 }
 
 // Read from Google Sheets
@@ -871,7 +867,6 @@ async function loadWeek() {
 
 // Sign out function
 function signOut() {
-  google.accounts.id.disableAutoCallback();
   accessToken = null;
   applyData({});
 }
